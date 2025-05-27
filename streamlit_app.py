@@ -28,25 +28,48 @@ except ImportError:
     MATPLOTLIB_AVAILABLE = False
     plt = None
 
-# Agregar el directorio actual al path para importar main_model
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Agregar el directorio src al path para importar el nuevo paquete orc
+src_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
 
-# Importar funciones del modelo
-from main_model import (
-    run_simulation, create_default_params, create_validated_params,
-    validate_params, analyze_performance, compute_metrics,
-    # Funciones de torque temporal
-    tau_grass_sinusoidal, tau_grass_step, tau_grass_ramp, tau_grass_exponential,
-    # Funciones de torque espacial
-    tau_grass_spatial_zones, tau_grass_spatial_gaussian_patches,
-    tau_grass_spatial_sigmoid_transition, tau_grass_spatial_sinusoidal,
-    tau_grass_spatial_complex_terrain,
-    # Funciones de condiciones iniciales
-    create_initial_conditions, initial_conditions_from_rpm,
-    initial_conditions_blade_angle, initial_conditions_spinning,
-    # Configuration Wrapper
-    RotaryCutterConfig, ConfigurationManager
-)
+# Importar funciones del modelo - usando bridge para compatibilidad
+try:
+    # Intentar importar desde la nueva estructura modular
+    from orc_bridge import (
+        run_simulation, create_default_params, create_validated_params,
+        validate_params, analyze_performance, compute_metrics,
+        # Funciones de torque temporal
+        tau_grass_sinusoidal, tau_grass_step, tau_grass_ramp, tau_grass_exponential,
+        # Funciones de torque espacial
+        tau_grass_spatial_zones, tau_grass_spatial_gaussian_patches,
+        tau_grass_spatial_sigmoid_transition, tau_grass_spatial_sinusoidal,
+        tau_grass_spatial_complex_terrain,
+        # Funciones de condiciones iniciales
+        create_initial_conditions, initial_conditions_from_rpm,
+        initial_conditions_blade_angle, initial_conditions_spinning,
+        # Configuration Wrapper
+        RotaryCutterConfig, ConfigurationManager
+    )
+    USING_NEW_ARCHITECTURE = True
+except ImportError:
+    # Fallback al modelo original
+    from main_model import (
+        run_simulation, create_default_params, create_validated_params,
+        validate_params, analyze_performance, compute_metrics,
+        # Funciones de torque temporal
+        tau_grass_sinusoidal, tau_grass_step, tau_grass_ramp, tau_grass_exponential,
+        # Funciones de torque espacial
+        tau_grass_spatial_zones, tau_grass_spatial_gaussian_patches,
+        tau_grass_spatial_sigmoid_transition, tau_grass_spatial_sinusoidal,
+        tau_grass_spatial_complex_terrain,
+        # Funciones de condiciones iniciales
+        create_initial_conditions, initial_conditions_from_rpm,
+        initial_conditions_blade_angle, initial_conditions_spinning,
+        # Configuration Wrapper
+        RotaryCutterConfig, ConfigurationManager
+    )
+    USING_NEW_ARCHITECTURE = False
 
 
 

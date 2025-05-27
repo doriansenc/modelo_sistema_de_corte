@@ -13,7 +13,8 @@ Modules:
 from .physics import (
     RotaryCutterPhysics,
     calculate_moment_of_inertia,
-    calculate_torque_components
+    calculate_kinetic_energy,
+    calculate_power
 )
 
 from .simulation import (
@@ -32,13 +33,14 @@ __all__ = [
     # Physics
     'RotaryCutterPhysics',
     'calculate_moment_of_inertia',
-    'calculate_torque_components',
-    
+    'calculate_kinetic_energy',
+    'calculate_power',
+
     # Simulation
     'SimulationEngine',
     'SimulationResult',
     'IntegrationMethod',
-    
+
     # Validation
     'ParameterValidator',
     'ValidationError',
