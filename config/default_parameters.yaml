@@ -1,0 +1,189 @@
+# Default Parameters for ORC Rotary Cutter Optimization System
+# This file contains the default parameter values used throughout the application
+
+# Application Information
+app:
+  name: "ORC - Rotary Cutter Optimization System"
+  version: "2.0.0"
+  description: "Advanced simulation and optimization system for rotary cutters"
+
+# Default Physical Parameters
+physics:
+  # Geometric parameters
+  geometry:
+    radius: 0.6                    # m - main radius
+    blade_length_percent: 30.0     # % - blade length as percentage of radius
+    cutting_width: 1.8             # m - cutting width
+  
+  # Mass and inertia parameters
+  mass:
+    total_mass: 15.0               # kg - total system mass
+    plate_mass_percent: 40.0       # % - plate mass as percentage of total
+    n_blades: 2                    # number of blades
+  
+  # Motor parameters
+  motor:
+    input_torque: 200.0            # N⋅m - motor torque
+  
+  # Resistance parameters
+  resistance:
+    viscous_friction: 0.1          # N⋅m⋅s/rad - viscous friction coefficient
+    aerodynamic_drag: 0.01         # N⋅m⋅s²/rad² - drag coefficient
+  
+  # Vegetation parameters
+  vegetation:
+    density: 1.0                   # kg/m² - vegetation density
+    grass_resistance: 15.0         # N⋅s/m - grass resistance constant
+    advance_velocity: 3.0          # m/s - forward velocity
+
+# Simulation Configuration
+simulation:
+  # Time parameters
+  time:
+    duration: 10.0                 # s - simulation duration
+    points: 1000                   # number of time points
+    start_time: 0.0                # s - start time
+  
+  # Integration parameters
+  integration:
+    method: "RK45"                 # integration method
+    rtol: 1.0e-8                   # relative tolerance
+    atol: 1.0e-10                  # absolute tolerance
+    max_step: null                 # maximum step size (null for automatic)
+  
+  # Initial conditions
+  initial_conditions:
+    angle: 0.0                     # rad - initial angle
+    angular_velocity: 0.0          # rad/s - initial angular velocity
+
+# User Interface Configuration
+ui:
+  # Layout settings
+  layout:
+    page_layout: "wide"
+    sidebar_state: "expanded"
+    theme: "professional"
+  
+  # Default ranges for input widgets
+  input_ranges:
+    mass: [1.0, 100.0]            # kg
+    radius: [0.1, 2.0]            # m
+    torque: [10.0, 1000.0]        # N⋅m
+    velocity: [0.1, 10.0]         # m/s
+    time: [1.0, 60.0]             # s
+    blades: [1, 12]               # count
+  
+  # Visualization settings
+  visualization:
+    default_colors:
+      primary: "#1f77b4"
+      secondary: "#ff7f0e"
+      success: "#2ca02c"
+      warning: "#d62728"
+      info: "#17becf"
+    
+    plot_settings:
+      width: 800
+      height: 400
+      font_size: 12
+      line_width: 2
+
+# Analysis Configuration
+analysis:
+  # Performance metrics
+  metrics:
+    enabled:
+      - "efficiency"
+      - "stability"
+      - "power"
+      - "energy"
+      - "cut_area"
+    
+    thresholds:
+      efficiency_good: 0.7         # 70% efficiency considered good
+      stability_good: 0.1          # 10% variation considered stable
+      power_max: 5000.0            # W - maximum reasonable power
+  
+  # Export settings
+  export:
+    default_format: "csv"
+    include_metadata: true
+    precision: 6                   # decimal places
+
+# Validation Limits
+validation:
+  # Physical limits for parameter validation
+  limits:
+    # Geometric parameters
+    radius_min: 0.01               # m
+    radius_max: 5.0                # m
+    length_min: 0.0                # m
+    length_ratio_max: 2.0          # L/R ratio
+    
+    # Mass and inertia parameters
+    mass_min: 0.1                  # kg
+    mass_max: 1000.0               # kg
+    inertia_min: 1.0e-6            # kg⋅m²
+    inertia_max: 1000.0            # kg⋅m²
+    
+    # Torque parameters
+    torque_min: 0.1                # N⋅m
+    torque_max: 10000.0            # N⋅m
+    
+    # Velocity parameters
+    angular_velocity_max: 1000.0   # rad/s
+    linear_velocity_max: 20.0      # m/s
+    
+    # Resistance parameters
+    friction_min: 0.0              # N⋅m⋅s/rad
+    friction_max: 100.0            # N⋅m⋅s/rad
+    drag_min: 0.0                  # N⋅m⋅s²/rad²
+    drag_max: 10.0                 # N⋅m⋅s²/rad²
+    
+    # Vegetation parameters
+    density_min: 0.0               # kg/m²
+    density_max: 10.0              # kg/m²
+    resistance_min: 0.0            # N⋅s/m
+    resistance_max: 1000.0         # N⋅s/m
+    
+    # Blade parameters
+    blades_min: 1
+    blades_max: 12
+    
+    # Cutting parameters
+    width_min: 0.1                 # m
+    width_max: 10.0                # m
+
+# Logging Configuration
+logging:
+  level: "INFO"                    # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_logging: false              # Enable file logging
+  log_file: "logs/orc.log"        # Log file path
+  max_file_size: 10485760          # 10 MB
+  backup_count: 5                  # Number of backup files
+
+# Performance Settings
+performance:
+  # Caching
+  caching:
+    enabled: true
+    max_size: 100                  # Maximum number of cached results
+    ttl: 3600                      # Time to live in seconds (1 hour)
+  
+  # Parallel processing
+  parallel:
+    enabled: false                 # Enable parallel processing
+    max_workers: null              # null for automatic detection
+  
+  # Memory management
+  memory:
+    max_simulation_size: 100000    # Maximum number of time points
+    garbage_collection: true       # Enable automatic garbage collection
+
+# Development Settings
+development:
+  debug: false                     # Enable debug mode
+  profiling: false                 # Enable performance profiling
+  testing: false                   # Enable testing mode
+  mock_data: false                 # Use mock data for testing

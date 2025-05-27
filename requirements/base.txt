@@ -1,0 +1,24 @@
+# Base requirements for ORC Rotary Cutter Optimization System
+# These are the minimum dependencies needed to run the application
+
+# Core scientific computing
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+plotly>=5.17.0
+
+# Web application framework
+streamlit>=1.28.0
+
+# File handling
+openpyxl>=3.1.0
+
+# Configuration and utilities
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# Logging and monitoring
+loguru>=0.7.0

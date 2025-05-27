@@ -1,232 +1,241 @@
-# ORC - Optimización de Rotary Cutter
+# ORC - Rotary Cutter Optimization System
 
-Sistema avanzado de simulación y optimización para rotary cutters basado en modelado físico con ecuaciones diferenciales.
+Advanced simulation and optimization system for rotary cutters based on physical modeling with differential equations.
 
-## Inicio Rápido
+## Quick Start
 
-### Opción 1: Scripts Automatizados (Recomendado)
+### Option 1: Automated Scripts (Recommended)
 
-1. **Configuración inicial** (solo la primera vez):
+1. **Initial setup** (first time only):
    ```bash
-   setup_env.bat
+   python scripts/setup.py
    ```
 
-2. **Ejecutar la aplicación**:
+2. **Run the application**:
    ```bash
-   run_app.bat
+   python scripts/run_app.py
    ```
 
-### Opción 2: Manual
+### Option 2: Manual Installation
 
-1. **Crear y activar entorno virtual**:
+1. **Create and activate virtual environment**:
    ```bash
-   python -m venv env
-   env\Scripts\activate  # Windows
-   # source env/bin/activate  # Linux/Mac
+   python -m venv venv
+
+   # Windows
+   venv\Scripts\activate
+
+   # macOS/Linux
+   source venv/bin/activate
    ```
 
-2. **Instalar dependencias**:
+2. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Ejecutar aplicación**:
+3. **Run application**:
    ```bash
-   streamlit run streamlit_app.py
+   streamlit run src/orc/ui/app.py
    ```
 
-## 📁 Estructura del Proyecto
+## Project Structure
 
 ```
 orc/
-├── streamlit_app.py    # Aplicación principal Streamlit
-├── main_model.py       # Modelo físico y simulaciones
-├── requirements.txt    # Dependencias Python
-├── run_app.bat        # Script para ejecutar la app
-├── setup_env.bat      # Script de configuración inicial
-├── .gitignore         # Archivos ignorados por Git
-└── README.md          # Este archivo
+├── src/orc/                    # Main source code package
+│   ├── core/                   # Core physics and simulation engine
+│   ├── models/                 # Physical models and components
+│   ├── analysis/               # Analysis and metrics tools
+│   ├── config/                 # Configuration management
+│   ├── ui/                     # User interface components
+│   └── utils/                  # Utility functions
+├── tests/                      # Test suite
+├── docs/                       # Documentation
+├── scripts/                    # Cross-platform scripts
+├── config/                     # Configuration files
+├── data/                       # Sample data and outputs
+└── requirements/               # Dependency specifications
 ```
 
-##  Características Principales
+## Key Features
 
-- **Modelo Físico Avanzado**: Simulación basada en EDOs con scipy.integrate.solve_ivp
-- **Interfaz Streamlit Profesional**: Diseño moderno con esquema de colores sobrio
-- **Múltiples Configuraciones de Torque**: Temporal y espacial con funciones personalizables
-- **Análisis de Rendimiento**: Métricas de eficiencia energética y área de corte
-- **Carga de Configuraciones**: Soporte para archivos Excel y CSV
-- **Exportación de Resultados**: Descarga de datos en CSV/Excel
-- **Condiciones Iniciales Flexibles**: Múltiples opciones de arranque del sistema
+- **Advanced Physics Modeling**: Differential equation-based simulation using Newton's laws of rotational motion
+- **Comprehensive Parameter Management**: Structured configuration system with validation and persistence
+- **Interactive Web Interface**: Modern Streamlit-based UI with real-time visualization
+- **Performance Analysis**: Built-in metrics calculation and comparative analysis tools
+- **Cross-Platform Compatibility**: Works seamlessly on Windows, macOS, and Linux
+- **Modular Architecture**: Clean separation of concerns with reusable components
+- **Export Capabilities**: Multiple output formats (CSV, Excel, JSON) for data analysis
+- **Batch Processing**: Support for multiple configuration comparison and analysis
 
-##  Uso
+## Installation
 
-### Ejecutar la aplicación
+### Prerequisites
 
-Usa el script automatizado:
+- Python 3.8 or higher
+- Git (for cloning the repository)
+
+### Quick Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/orc-team/orc.git
+   cd orc
+   ```
+
+2. **Run the setup script**:
+   ```bash
+   # Basic installation
+   python scripts/setup.py
+
+   # Development installation (includes testing and development tools)
+   python scripts/setup.py --dev
+   ```
+
+3. **Start the application**:
+   ```bash
+   python scripts/run_app.py
+   ```
+
+### Manual Installation
+
+If you prefer manual installation or need more control:
+
+1. **Create virtual environment**:
+   ```bash
+   python -m venv venv
+
+   # Windows
+   venv\Scripts\activate
+
+   # macOS/Linux
+   source venv/bin/activate
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   # Basic requirements
+   pip install -r requirements.txt
+
+   # Development requirements (optional)
+   pip install -r requirements/dev.txt
+   ```
+
+3. **Install the package**:
+   ```bash
+   pip install -e .
+   ```
+
+## Usage
+
+### Starting the Application
+
+The easiest way to start the application is using the cross-platform launcher:
+
 ```bash
-run_app.bat
+python scripts/run_app.py
 ```
 
-O manualmente:
-```bash
-env\Scripts\activate
-streamlit run streamlit_app.py
-```
+Options:
+- `--port PORT`: Specify port number (default: 8501)
+- `--host HOST`: Specify host address (default: localhost)
+- `--dev`: Run in development mode with debug features
+- `--no-browser`: Don't automatically open browser
 
-La aplicación se abrirá automáticamente en tu navegador en `http://localhost:8501`
+### Using the Web Interface
 
-### Interfaz de Usuario
+1. Open your browser to `http://localhost:8501`
+2. Configure system parameters in the sidebar
+3. Select torque functions and initial conditions
+4. Run simulations and analyze results
+5. Export data for further analysis
 
-La aplicación está organizada en 4 pestañas principales:
-
-1. **Configuración de Torque**: Define funciones de resistencia vegetal
-2. **Condiciones Iniciales**: Establece el estado inicial del sistema
-3. **Simulación**: Ejecuta la simulación con parámetros configurados
-4. **Resultados y Análisis**: Visualiza resultados y métricas
-
-### Parámetros Principales
-
-- **Masa (kg)**: Masa total del sistema rotary cutter
-- **Radio (m)**: Radio principal del sistema
-- **Número de Cuchillas**: Configuración de cuchillas (1-12)
-- **Velocidad Angular (rad/s)**: Velocidad de referencia
-- **Torque Motor (Nm)**: Torque de entrada del motor
-- **Parámetros de Vegetación**: Densidad, resistencia, velocidad de avance
-
-### Funciones de Torque Disponibles
-
-#### Temporales
-- **Sinusoidal**: Variación periódica suave
-- **Escalón**: Cambio abrupto en el tiempo
-- **Rampa**: Transición lineal gradual
-- **Exponencial**: Crecimiento/decaimiento exponencial
-
-#### Espaciales
-- **Zonas Alternadas**: Patrones de vegetación alternados
-- **Parches Gaussianos**: Concentraciones localizadas
-- **Transición Sigmoide**: Cambios suaves entre zonas
-- **Sinusoidal Espacial**: Variación periódica en el espacio
-- **Terreno Complejo**: Combinación de múltiples patrones
-
-## Modelo Físico
-
-El sistema utiliza un modelo avanzado basado en ecuaciones diferenciales ordinarias (EDOs) que describe la dinámica rotacional del rotary cutter.
-
-### Sistema de EDOs
-
-Variables de estado:
-- **θ(t)**: Posición angular del plato [rad]
-- **ω(t)**: Velocidad angular del plato [rad/s]
-
-Ecuación de movimiento:
-```
-I_total × dω/dt = τ_input - τ_friction - τ_drag - τ_grass
-```
-
-### Componentes del Modelo
-
-#### Momento de Inercia Total
-```
-I_total = I_plate + n_blades × m_c × (R + L)²
-```
-- **I_plate**: Momento de inercia del plato
-- **n_blades**: Número de cuchillas
-- **m_c**: Masa por cuchilla
-- **R**: Radio al perno
-- **L**: Longitud de cuchilla
-
-#### Torques Resistivos
-- **Fricción viscosa**: τ_friction = b × ω
-- **Arrastre aerodinámico**: τ_drag = c_drag × ω² × sign(ω)
-- **Resistencia vegetal**: τ_grass = f(t) o τ_grass = k_grass × ρ_veg × v_avance × R
-
-### Métricas de Rendimiento
-
-- **Energía Total**: E_total = ∫ τ_input × ω dt
-- **Energía Útil**: E_util = ∫ τ_grass × ω dt
-- **Eficiencia**: η = E_util / E_total
-- **Área Cortada**: A = v_avance × w × t_total
-
-## Ejemplo de Uso Programático
+### Programmatic Usage
 
 ```python
-from main_model import run_simulation, create_default_params, create_validated_params
+from orc import RotaryCutterModel, RotaryCutterConfig
 
-# Crear parámetros base del sistema
-base_params = create_default_params(
-    mass=15.0,           # kg - masa total
-    radius=0.6,          # m - radio principal
-    tau_input=200.0      # Nm - torque motor
-)
-
-# Personalizar parámetros específicos
-params = create_validated_params(
-    base_params,
-    n_blades=4,          # número de cuchillas
-    rho_veg=1.2,         # kg/m² - densidad vegetal
-    v_avance=3.5         # m/s - velocidad de avance
-)
-
-# Ejecutar simulación
-results = run_simulation(
-    mass=15.0,
+# Create configuration
+config = RotaryCutterConfig(
+    name="Test Configuration",
     radius=0.6,
-    omega=None,
-    T_end=5.0,
-    dt=0.01,
-    advanced_params=params
+    total_mass=15.0,
+    input_torque=200.0,
+    simulation_time=10.0
 )
 
-# Acceder a resultados
-print(f"Momento de inercia: {results['moment_of_inertia']:.4f} kg⋅m²")
-print(f"Velocidad final: {results['omega'][-1]:.2f} rad/s")
-print(f"Eficiencia: {results['advanced_metrics']['eta']*100:.1f}%")
+# Create and run model
+model = RotaryCutterModel(config)
+result = model.run_simulation()
+
+# Analyze results
+analysis = model.analyze_performance(result)
+print(f"Efficiency: {analysis['efficiency']:.2%}")
 ```
 
-## Desarrollo y Mantenimiento
+## Documentation
 
-### Estructura del código
+- **[Installation Guide](docs/installation.md)**: Detailed installation instructions for all platforms
+- **[User Guide](docs/user_guide.md)**: Complete user manual with examples
+- **[API Reference](docs/api_reference.md)**: Comprehensive API documentation
+- **[Physics Model](docs/physics_model.md)**: Detailed explanation of the physical model
+- **[Developer Guide](docs/developer_guide.md)**: Information for contributors and developers
 
-- **`streamlit_app.py`**: Interfaz de usuario completa con Streamlit
-- **`main_model.py`**: Modelo físico, simulaciones y análisis
-- **`requirements.txt`**: Dependencias del proyecto
-- **Scripts de automatización**: `run_app.bat`, `setup_env.bat`
+## System Requirements
 
-### Optimización
+### Minimum Requirements
+- Python 3.8+
+- 4 GB RAM
+- 1 GB free disk space
+- Modern web browser (Chrome, Firefox, Safari, Edge)
 
-- Uso de `@st.cache_data` para evitar recálculos innecesarios
-- Almacenamiento en `session_state` para persistencia de datos
-- Integración numérica eficiente con `scipy.integrate.solve_ivp`
-- Validación robusta de parámetros físicos
+### Recommended Requirements
+- Python 3.10+
+- 8 GB RAM
+- 2 GB free disk space
+- Multi-core processor for faster simulations
 
-### Testing
+### Platform Support
+- **Windows**: Windows 10/11 (x64)
+- **macOS**: macOS 10.15+ (Intel and Apple Silicon)
+- **Linux**: Ubuntu 18.04+, CentOS 7+, or equivalent distributions
 
-Para probar el modelo físico:
-```bash
-env\Scripts\activate
-python -c "from main_model import run_simulation; print('Modelo funcionando')"
-```
+## Contributing
 
-## Características Avanzadas
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-- **Validación de Parámetros**: Verificación automática de coherencia física
-- **Condiciones Iniciales Flexibles**: Múltiples opciones de arranque
-- **Funciones de Torque Personalizables**: Temporal y espacial
-- **Análisis de Métricas**: Eficiencia energética y rendimiento
-- **Exportación de Datos**: CSV y Excel con múltiples hojas
-- **Interfaz Profesional**: Diseño sobrio con iconos SVG personalizados
+### Development Setup
 
-## Requisitos del Sistema
+1. Fork the repository
+2. Clone your fork
+3. Install development dependencies:
+   ```bash
+   python scripts/setup.py --dev
+   ```
+4. Create a feature branch
+5. Make your changes
+6. Run tests:
+   ```bash
+   pytest
+   ```
+7. Submit a pull request
 
-- **Python**: 3.8 o superior
-- **Memoria RAM**: Mínimo 4 GB (recomendado 8 GB)
-- **Espacio en disco**: 500 MB para entorno virtual
-- **Navegador**: Chrome, Firefox, Edge o Safari actualizado
+## License
 
-## Licencia
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Proyecto académico para optimización de rotary cutters.
+## Support
 
----
+- **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/orc-team/orc/issues)
+- **Discussions**: Join the community on [GitHub Discussions](https://github.com/orc-team/orc/discussions)
+- **Documentation**: Visit our [documentation site](https://orc-team.github.io/orc)
 
-**ORC Project** - Sistema de Optimización de Rotary Cutter | Modelado Físico Avanzado
+## Acknowledgments
+
+- Built with [Streamlit](https://streamlit.io/) for the web interface
+- Physics simulation powered by [SciPy](https://scipy.org/)
+- Visualization using [Plotly](https://plotly.com/) and [Matplotlib](https://matplotlib.org/)
+- Special thanks to all contributors and the open-source community
+
+

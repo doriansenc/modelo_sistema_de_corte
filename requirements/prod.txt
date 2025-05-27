@@ -1,0 +1,16 @@
+# Production requirements for ORC Rotary Cutter Optimization System
+# Include base requirements
+-r base.txt
+
+# Production-specific packages
+gunicorn>=20.1.0
+uvicorn>=0.20.0
+
+# Monitoring and logging
+sentry-sdk>=1.20.0
+
+# Performance optimization
+numba>=0.57.0
+
+# Security
+cryptography>=40.0.0
