@@ -1,4 +1,13 @@
 import streamlit as st
+
+# Configuración de la página - DEBE SER EL PRIMER COMANDO DE STREAMLIT
+st.set_page_config(
+    page_title="ORC - Optimización de Rotary Cutter",
+    page_icon="⚙️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
