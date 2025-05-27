@@ -26,7 +26,6 @@ try:
     MATPLOTLIB_AVAILABLE = True
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
-    st.error("Matplotlib no está disponible. Instala matplotlib para ver gráficos.")
     plt = None
 
 # Agregar el directorio actual al path para importar main_model
@@ -49,13 +48,7 @@ from main_model import (
     RotaryCutterConfig, ConfigurationManager
 )
 
-# Configuración de la página
-st.set_page_config(
-    page_title="ORC - Optimización de Rotary Cutter",
-    page_icon="⚙️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+
 
 # CSS personalizado para diseño sobrio y profesional
 st.markdown("""
@@ -605,6 +598,10 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Verificar disponibilidad de matplotlib después de la configuración de página
+if not MATPLOTLIB_AVAILABLE:
+    st.error("⚠️ Matplotlib no está disponible. Instala matplotlib para ver gráficos.")
 
 def load_configuration_from_file(uploaded_file):
     """
