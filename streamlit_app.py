@@ -3,7 +3,7 @@ import streamlit as st
 # Configuración de la página - DEBE SER EL PRIMER COMANDO DE STREAMLIT
 st.set_page_config(
     page_title="ORC - Optimización de Rotary Cutter",
-    page_icon="⚙️",
+    page_icon="🔧",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -468,6 +468,87 @@ st.markdown("""
         margin-right: 8px;
     }
 
+    /* Professional icons for efficiency analysis */
+    .icon-efficiency::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpath d='M3 3v18h18'/%3E%3Cpath d='M18.7 8l-5.1 5.2-2.8-2.7L7 14.3'/%3E%3Ccircle cx='18.7' cy='8' r='2'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-power::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'/%3E%3Cline x1='12' y1='2' x2='12' y2='12'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-trend::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpolyline points='22,12 18,12 15,21 9,3 6,12 2,12'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-pie::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpath d='M21.21 15.89A10 10 0 1 1 8 2.83'/%3E%3Cpath d='M22 12A10 10 0 0 0 12 2v10z'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-summary::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14,2 14,8 20,8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10,9 9,9 8,9'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-metrics::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Crect x='7' y='7' width='3' height='9'/%3E%3Crect x='14' y='7' width='3' height='5'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-time::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12,6 12,12 16,14'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-recommendations::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Cpath d='M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m6-6h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-4m-6-6V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 0V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    .icon-guide::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'/%3E%3C/svg%3E");
+        margin-right: 8px;
+    }
+
+    /* Professional status indicators */
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin: 0.25rem 0;
+    }
+
+    .status-excellent {
+        background-color: #dcfce7;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+
+    .status-good {
+        background-color: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+    }
+
+    .status-poor {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    .status-info {
+        background-color: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #bfdbfe;
+    }
+
     /* Mejoras para DataFrames y tablas */
     .stDataFrame {
         border: 1px solid var(--medium-gray);
@@ -624,7 +705,7 @@ st.markdown("""
 
 # Verificar disponibilidad de matplotlib después de la configuración de página
 if not MATPLOTLIB_AVAILABLE:
-    st.error("⚠️ Matplotlib no está disponible. Instala matplotlib para ver gráficos.")
+    st.error("Matplotlib no está disponible. Instala matplotlib para ver gráficos.")
 
 def load_configuration_from_file(uploaded_file):
     """
@@ -2864,11 +2945,12 @@ Config_Agricola,16.0,210.0,4,0.65,62.0,1.3,3.6,19.0,2.1"""
             st.rerun()
 
     # Área principal dividida en tabs con iconos profesionales
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
         "Configuración de Torque",
         "Condiciones Iniciales",
         "Simulación",
-        "Resultados y Análisis"
+        "Resultados y Análisis",
+        "Análisis de Eficiencia"
     ])
 
     # Crear parámetros base
@@ -2912,6 +2994,10 @@ Config_Agricola,16.0,210.0,4,0.65,62.0,1.3,3.6,19.0,2.1"""
     # Tab 4: Resultados y Análisis
     with tab4:
         results_analysis_tab()
+
+    # Tab 5: Análisis de Eficiencia
+    with tab5:
+        efficiency_analysis_tab()
 
 def configure_torque_tab(base_params, params_valid):
     """Configuración del tipo de función de torque resistivo"""
@@ -4215,6 +4301,390 @@ ANÁLISIS DE RENDIMIENTO:
     )
 
     st.info("Selecciona todo el texto del área superior y cópialo con Ctrl+A y Ctrl+C")
+
+
+def efficiency_analysis_tab():
+    """Tab de análisis avanzado de eficiencia"""
+
+    st.markdown('<div class="section-header icon-efficiency">Análisis Avanzado de Eficiencia</div>',
+                unsafe_allow_html=True)
+
+    if st.session_state.simulation_results is None:
+        st.info("Ejecuta una simulación para ver el análisis de eficiencia aquí")
+
+        # Mostrar guía de interpretación mientras no hay datos
+        with st.expander("Guía de Interpretación de Eficiencia", expanded=True):
+            st.markdown('<div class="icon-guide">Fundamentos de Eficiencia Energética</div>', unsafe_allow_html=True)
+            st.markdown("""
+            ### ¿Qué es la Eficiencia en un Rotary Cutter?
+
+            La **eficiencia energética** mide qué porcentaje de la energía total del motor
+            se utiliza efectivamente para cortar vegetación:
+
+            **Eficiencia (%) = (Potencia Útil / Potencia Total) × 100**
+
+            #### Rangos de Eficiencia:
+            """)
+
+            # Professional status indicators instead of emojis
+            st.markdown("""
+            <div class="status-indicator status-excellent">Alta (>80%): Excelente aprovechamiento energético</div>
+            <div class="status-indicator status-good">Media (60-80%): Rendimiento aceptable, puede optimizarse</div>
+            <div class="status-indicator status-poor">Baja (<60%): Ineficiente, requiere ajustes</div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("""
+            #### Factores que Afectan la Eficiencia:
+            - **Densidad de vegetación**: Mayor densidad → Mayor resistencia útil
+            - **Velocidad de avance**: Velocidad óptima maximiza eficiencia
+            - **Configuración de cuchillas**: Número y geometría influyen
+            - **Condiciones del terreno**: Variaciones espaciales afectan rendimiento
+            """)
+        return
+
+    results = st.session_state.simulation_results
+
+    # Verificar que tenemos métricas avanzadas
+    if 'advanced_metrics' not in results:
+        st.warning("Las métricas avanzadas no están disponibles para esta simulación")
+        return
+
+    advanced_metrics = results['advanced_metrics']
+
+    # Verificar que tenemos las nuevas métricas de eficiencia
+    if 'efficiency_instantaneous' not in advanced_metrics:
+        st.warning("Las métricas de eficiencia detalladas no están disponibles. Ejecuta una nueva simulación.")
+        return
+
+    # Mostrar análisis de eficiencia
+    display_efficiency_analysis(results, advanced_metrics)
+
+
+def display_efficiency_analysis(results, advanced_metrics):
+    """Muestra el análisis completo de eficiencia con todos los gráficos"""
+
+    # Extraer datos necesarios
+    time = advanced_metrics['time_series']
+    power_total = advanced_metrics['power_total_series']
+    power_util = advanced_metrics['power_util_series']
+    efficiency_inst = advanced_metrics['efficiency_instantaneous']
+    efficiency_avg = advanced_metrics['efficiency_average']
+
+    # === MÉTRICAS CLAVE ===
+    st.markdown('<div class="section-header icon-efficiency">Métricas Clave de Eficiencia</div>', unsafe_allow_html=True)
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Eficiencia Promedio",
+            f"{efficiency_avg:.1f}%",
+            delta=f"{efficiency_avg - 70:.1f}%" if efficiency_avg > 70 else f"{efficiency_avg - 70:.1f}%"
+        )
+
+    with col2:
+        st.metric(
+            "Eficiencia Máxima",
+            f"{advanced_metrics['efficiency_peak']:.1f}%"
+        )
+
+    with col3:
+        st.metric(
+            "Eficiencia Mínima",
+            f"{advanced_metrics['efficiency_min']:.1f}%"
+        )
+
+    with col4:
+        energy_efficiency = (advanced_metrics['E_util'] / advanced_metrics['E_total']) * 100
+        st.metric(
+            "Eficiencia Energética Total",
+            f"{energy_efficiency:.1f}%"
+        )
+
+    # === GRÁFICO 1: POTENCIA TOTAL VS ÚTIL ===
+    st.markdown('<div class="section-header icon-power">Potencia Total vs Potencia Útil</div>', unsafe_allow_html=True)
+
+    fig_power = go.Figure()
+
+    # Potencia total
+    fig_power.add_trace(go.Scatter(
+        x=time, y=power_total,
+        mode='lines',
+        name='Potencia Total',
+        line=dict(color='#ef4444', width=3),
+        hovertemplate='<b>Tiempo:</b> %{x:.3f} s<br><b>Potencia Total:</b> %{y:.1f} W<extra></extra>'
+    ))
+
+    # Potencia útil
+    fig_power.add_trace(go.Scatter(
+        x=time, y=power_util,
+        mode='lines',
+        name='Potencia Útil',
+        line=dict(color='#10b981', width=3),
+        yaxis='y2',
+        hovertemplate='<b>Tiempo:</b> %{x:.3f} s<br><b>Potencia Útil:</b> %{y:.1f} W<extra></extra>'
+    ))
+
+    fig_power.update_layout(
+        title='Evolución de Potencia Total y Útil',
+        xaxis_title='Tiempo (s)',
+        yaxis=dict(
+            title='Potencia Total (W)',
+            side='left',
+            color='#ef4444'
+        ),
+        yaxis2=dict(
+            title='Potencia Útil (W)',
+            side='right',
+            overlaying='y',
+            color='#10b981'
+        ),
+        hovermode='x unified',
+        height=400,
+        legend=dict(x=0.02, y=0.98)
+    )
+
+    st.plotly_chart(fig_power, use_container_width=True)
+
+    # === GRÁFICO 2: EFICIENCIA INSTANTÁNEA ===
+    st.markdown('<div class="section-header icon-trend">Eficiencia Instantánea</div>', unsafe_allow_html=True)
+
+    fig_eff = go.Figure()
+
+    # Eficiencia instantánea
+    fig_eff.add_trace(go.Scatter(
+        x=time, y=efficiency_inst,
+        mode='lines',
+        name='Eficiencia Instantánea',
+        line=dict(color='#3b82f6', width=3),
+        fill='tonexty',
+        fillcolor='rgba(59, 130, 246, 0.1)',
+        hovertemplate='<b>Tiempo:</b> %{x:.3f} s<br><b>Eficiencia:</b> %{y:.1f}%<extra></extra>'
+    ))
+
+    # Línea de eficiencia promedio
+    fig_eff.add_hline(
+        y=efficiency_avg,
+        line_dash="dash",
+        line_color="#1e40af",
+        line_width=2,
+        annotation_text=f"Promedio: {efficiency_avg:.1f}%",
+        annotation_position="top right"
+    )
+
+    # Líneas de referencia para rangos de eficiencia
+    fig_eff.add_hline(y=80, line_dash="dot", line_color="#10b981", opacity=0.7,
+                     annotation_text="Alta Eficiencia (80%)", annotation_position="left")
+    fig_eff.add_hline(y=60, line_dash="dot", line_color="#f59e0b", opacity=0.7,
+                     annotation_text="Eficiencia Media (60%)", annotation_position="left")
+
+    fig_eff.update_layout(
+        title='Eficiencia Instantánea vs Tiempo',
+        xaxis_title='Tiempo (s)',
+        yaxis_title='Eficiencia (%)',
+        yaxis=dict(range=[0, min(100, max(efficiency_inst) * 1.1)]),
+        hovermode='x unified',
+        height=400
+    )
+
+    st.plotly_chart(fig_eff, use_container_width=True)
+
+    # === GRÁFICO 3: DISTRIBUCIÓN DE ENERGÍA (PIE CHART) ===
+    st.markdown('<div class="section-header icon-pie">Distribución de Energía</div>', unsafe_allow_html=True)
+
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        # Datos para el pie chart
+        energy_useful = advanced_metrics['E_util']
+        energy_losses = advanced_metrics['E_losses']
+
+        fig_pie = go.Figure(data=[go.Pie(
+            labels=['Energía Útil', 'Pérdidas'],
+            values=[energy_useful, energy_losses],
+            hole=0.4,
+            marker_colors=['#10b981', '#ef4444'],
+            textinfo='label+percent+value',
+            texttemplate='<b>%{label}</b><br>%{percent}<br>%{value:.1f} J',
+            hovertemplate='<b>%{label}</b><br>Energía: %{value:.1f} J<br>Porcentaje: %{percent}<extra></extra>'
+        )])
+
+        fig_pie.update_layout(
+            title='Distribución de Energía Total',
+            height=400,
+            showlegend=True,
+            legend=dict(orientation="v", yanchor="middle", y=0.5, xanchor="left", x=1.05)
+        )
+
+        st.plotly_chart(fig_pie, use_container_width=True)
+
+    with col2:
+        st.markdown('<div class="icon-summary">Resumen Energético</div>', unsafe_allow_html=True)
+
+        total_energy = advanced_metrics['E_total']
+        useful_percent = (energy_useful / total_energy) * 100
+        losses_percent = (energy_losses / total_energy) * 100
+
+        st.metric("Energía Total", f"{total_energy:.1f} J")
+        st.metric("Energía Útil", f"{energy_useful:.1f} J", f"{useful_percent:.1f}%")
+        st.metric("Pérdidas", f"{energy_losses:.1f} J", f"{losses_percent:.1f}%")
+
+        # Professional status indicators instead of emojis
+        if useful_percent > 80:
+            st.markdown('<div class="status-indicator status-excellent">Excelente aprovechamiento energético</div>', unsafe_allow_html=True)
+        elif useful_percent > 60:
+            st.markdown('<div class="status-indicator status-good">Aprovechamiento moderado</div>', unsafe_allow_html=True)
+        else:
+            st.markdown('<div class="status-indicator status-poor">Bajo aprovechamiento energético</div>', unsafe_allow_html=True)
+
+    # === GRÁFICO 4: MÉTRICAS DE RENDIMIENTO (BAR CHART) ===
+    st.markdown('<div class="section-header icon-metrics">Métricas de Rendimiento</div>', unsafe_allow_html=True)
+
+    # Preparar datos para el gráfico de barras
+    metrics_names = [
+        'Eficiencia Promedio (%)',
+        'Eficiencia Máxima (%)',
+        'Potencia Pico (W)',
+        'Potencia Útil Pico (W)',
+        'Tiempo Alta Eficiencia (%)',
+        'Área Cortada (m²)'
+    ]
+
+    metrics_values = [
+        efficiency_avg,
+        advanced_metrics['efficiency_peak'],
+        advanced_metrics['power_peak'],
+        advanced_metrics['power_util_peak'],
+        advanced_metrics['high_efficiency_time_percent'],
+        advanced_metrics['A_total']
+    ]
+
+    # Normalizar valores para visualización (escalar a 0-100)
+    normalized_values = []
+    for i, value in enumerate(metrics_values):
+        if i < 2 or i == 4:  # Porcentajes ya están en 0-100
+            normalized_values.append(value)
+        elif i == 2 or i == 3:  # Potencias - escalar a porcentaje del máximo
+            max_power = max(advanced_metrics['power_peak'], advanced_metrics['power_util_peak'])
+            normalized_values.append((value / max_power) * 100)
+        else:  # Área - escalar según un valor de referencia
+            normalized_values.append(min(100, (value / 10) * 100))  # Asumiendo 10 m² como referencia
+
+    # Colores según el rendimiento
+    colors = []
+    for i, norm_val in enumerate(normalized_values):
+        if i < 5:  # Para métricas de eficiencia y tiempo
+            if norm_val > 80:
+                colors.append('#10b981')  # Verde
+            elif norm_val > 60:
+                colors.append('#f59e0b')  # Amarillo
+            else:
+                colors.append('#ef4444')  # Rojo
+        else:
+            colors.append('#3b82f6')  # Azul para área
+
+    fig_bar = go.Figure(data=[
+        go.Bar(
+            x=metrics_names,
+            y=normalized_values,
+            text=[f"{val:.1f}" for val in metrics_values],
+            textposition='auto',
+            marker_color=colors,
+            hovertemplate='<b>%{x}</b><br>Valor: %{text}<br>Normalizado: %{y:.1f}%<extra></extra>'
+        )
+    ])
+
+    fig_bar.update_layout(
+        title='Métricas Clave de Rendimiento',
+        xaxis_title='Métricas',
+        yaxis_title='Valor Normalizado (%)',
+        yaxis=dict(range=[0, 100]),
+        height=400,
+        xaxis_tickangle=-45
+    )
+
+    st.plotly_chart(fig_bar, use_container_width=True)
+
+    # === ANÁLISIS TEMPORAL DE EFICIENCIA ===
+    st.markdown('<div class="section-header icon-time">Análisis Temporal de Eficiencia</div>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Tiempo en Alta Eficiencia",
+            f"{advanced_metrics['high_efficiency_time_percent']:.1f}%",
+            help="Porcentaje del tiempo con eficiencia > 80%"
+        )
+
+    with col2:
+        st.metric(
+            "Tiempo en Eficiencia Media",
+            f"{advanced_metrics['medium_efficiency_time_percent']:.1f}%",
+            help="Porcentaje del tiempo con eficiencia 60-80%"
+        )
+
+    with col3:
+        st.metric(
+            "Tiempo en Baja Eficiencia",
+            f"{advanced_metrics['low_efficiency_time_percent']:.1f}%",
+            help="Porcentaje del tiempo con eficiencia < 60%"
+        )
+
+    # === RECOMENDACIONES ===
+    st.markdown('<div class="section-header icon-recommendations">Recomendaciones de Optimización</div>', unsafe_allow_html=True)
+
+    recommendations = generate_efficiency_recommendations(advanced_metrics)
+
+    for rec_type, rec_text in recommendations.items():
+        if rec_type == "success":
+            st.success(rec_text)
+        elif rec_type == "warning":
+            st.warning(rec_text)
+        elif rec_type == "error":
+            st.error(rec_text)
+        else:
+            st.info(rec_text)
+
+
+def generate_efficiency_recommendations(advanced_metrics):
+    """Genera recomendaciones basadas en las métricas de eficiencia"""
+
+    recommendations = {}
+
+    efficiency_avg = advanced_metrics['efficiency_average']
+    high_eff_time = advanced_metrics['high_efficiency_time_percent']
+    efficiency_peak = advanced_metrics['efficiency_peak']
+    efficiency_min = advanced_metrics['efficiency_min']
+
+    # Recomendaciones basadas en eficiencia promedio
+    if efficiency_avg > 85:
+        recommendations["success"] = "**Excelente rendimiento**: El sistema opera con alta eficiencia. Mantén los parámetros actuales."
+    elif efficiency_avg > 70:
+        recommendations["warning"] = "**Buen rendimiento con margen de mejora**: Considera ajustar la velocidad de avance o la configuración de cuchillas."
+    else:
+        recommendations["error"] = "**Rendimiento bajo**: Revisa la configuración del sistema. Posibles causas: velocidad inadecuada, exceso de fricción, o configuración de cuchillas subóptima."
+
+    # Recomendaciones basadas en variabilidad
+    efficiency_range = efficiency_peak - efficiency_min
+    if efficiency_range > 40:
+        recommendations["info"] = "**Alta variabilidad detectada**: La eficiencia varía significativamente. Considera usar torque variable o ajustar la velocidad según las condiciones del terreno."
+
+    # Recomendaciones basadas en tiempo en alta eficiencia
+    if high_eff_time < 30:
+        recommendations["warning"] = "**Poco tiempo en alta eficiencia**: Solo el {:.1f}% del tiempo opera con alta eficiencia. Optimiza los parámetros operacionales.".format(high_eff_time)
+
+    # Recomendaciones específicas
+    if efficiency_avg < 60:
+        recommendations["info"] = """
+        **Sugerencias específicas para mejorar eficiencia**:
+        - Reducir fricción viscosa (parámetro 'b')
+        - Optimizar número de cuchillas
+        - Ajustar velocidad de avance según densidad vegetal
+        - Verificar configuración del torque de entrada
+        """
+
+    return recommendations
 
 
 if __name__ == "__main__":

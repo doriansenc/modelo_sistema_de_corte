@@ -216,13 +216,14 @@ def simulate_advanced_configuration(params: Dict, t_max: float = 10.0,
 def compute_metrics(sol, params):
     """
     Calcula energía total, energía útil (por corte), área cortada y eficiencia.
+    Incluye métricas avanzadas para el dashboard de análisis de eficiencia.
 
     Entradas:
     - sol: objeto resultado de solve_ivp con .t (tiempo), .y (solución)
     - params: diccionario con parámetros del sistema
 
     Salidas:
-    - dict con: E_total, E_util, A_total, eta, epsilon
+    - dict con: E_total, E_util, A_total, eta, epsilon y métricas adicionales
     """
 
     t = sol.t                         # Vector de tiempo
@@ -263,7 +264,47 @@ def compute_metrics(sol, params):
     eta = E_util / E_total if E_total > 0 else 0  # eficiencia energética
     epsilon = A_total / E_total if E_total > 0 else 0  # m²/J
 
+    # === MÉTRICAS ADICIONALES PARA DASHBOARD DE EFICIENCIA ===
+
+    # Potencia total instantánea para todo el tiempo
+    power_total_full = tau_input * omega
+
+    # Potencia útil instantánea para todo el tiempo
+    if 'tau_grass_func' in params and params['tau_grass_func'] is not None:
+        tau_grass_full = np.array([params['tau_grass_func'](t_i) for t_i in t])
+        power_util_full = tau_grass_full * omega
+    else:
+        tau_grass = k_grass * rho_veg * v_avance * R
+        power_util_full = tau_grass * omega
+
+    # Eficiencia instantánea (%)
+    # Usar máscara más robusta para evitar divisiones por cero y valores inválidos
+    valid_mask = (power_total_full > 1e-6) & (power_util_full >= 0) & np.isfinite(power_total_full) & np.isfinite(power_util_full)
+    efficiency_instantaneous = np.zeros_like(power_total_full)
+    efficiency_instantaneous[valid_mask] = (power_util_full[valid_mask] / power_total_full[valid_mask]) * 100
+
+    # Limitar eficiencia a valores razonables (0-100%)
+    efficiency_instantaneous = np.clip(efficiency_instantaneous, 0.0, 100.0)
+
+    # Eficiencia promedio
+    efficiency_average = np.mean(efficiency_instantaneous)
+
+    # Energía perdida
+    E_losses = E_total - E_util
+
+    # Métricas de rendimiento adicionales
+    power_peak = np.max(power_total_full)
+    power_util_peak = np.max(power_util_full)
+    efficiency_peak = np.max(efficiency_instantaneous)
+    efficiency_min = np.min(efficiency_instantaneous)
+
+    # Tiempo en diferentes rangos de eficiencia
+    high_eff_time = np.sum(efficiency_instantaneous > 80) / len(efficiency_instantaneous) * 100
+    medium_eff_time = np.sum((efficiency_instantaneous >= 60) & (efficiency_instantaneous <= 80)) / len(efficiency_instantaneous) * 100
+    low_eff_time = np.sum(efficiency_instantaneous < 60) / len(efficiency_instantaneous) * 100
+
     return {
+        # Métricas básicas existentes
         'E_total': E_total,
         'E_util': E_util,
         'A_total': A_total,
@@ -273,7 +314,22 @@ def compute_metrics(sol, params):
         'power_util_avg': np.mean(power_util),
         'cutting_width': w,
         'cutting_speed': v_avance,
-        'simulation_time': t[-1]
+        'simulation_time': t[-1],
+
+        # Nuevas métricas para dashboard de eficiencia
+        'time_series': t,
+        'power_total_series': power_total_full,
+        'power_util_series': power_util_full,
+        'efficiency_instantaneous': efficiency_instantaneous,
+        'efficiency_average': efficiency_average,
+        'E_losses': E_losses,
+        'power_peak': power_peak,
+        'power_util_peak': power_util_peak,
+        'efficiency_peak': efficiency_peak,
+        'efficiency_min': efficiency_min,
+        'high_efficiency_time_percent': high_eff_time,
+        'medium_efficiency_time_percent': medium_eff_time,
+        'low_efficiency_time_percent': low_eff_time
     }
 
 
