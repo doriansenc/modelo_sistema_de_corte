@@ -2,8 +2,8 @@ import streamlit as st
 
 # Configuración de la página - DEBE SER EL PRIMER COMANDO DE STREAMLIT
 st.set_page_config(
-    page_title="ORC - Optimización de Rotary Cutter",
-    page_icon="🔧",
+    page_title="ORC - Optimización de sistema de corte",
+    page_icon="⚙",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -87,6 +87,14 @@ st.markdown("""
         --text-secondary: #64748b;
         --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+        /* User-preferred colors for energy analysis */
+        --useful-energy: #10b981;
+        --energy-losses: #ef4444;
+        --useful-energy-light: #d1fae5;
+        --energy-losses-light: #fee2e2;
+        --useful-energy-dark: #065f46;
+        --energy-losses-dark: #991b1b;
     }
 
     /* Fondo general de la aplicación */
@@ -700,6 +708,221 @@ st.markdown("""
     .stExpander [data-testid="stExpanderDetails"] {
         padding: 1rem 0;
     }
+
+    /* Professional Physical Model Explanation Section Styles */
+    .model-explanation-container {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--medium-gray);
+    }
+
+    .model-section-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid var(--primary-blue);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .model-subsection-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 2rem 0 1rem 0;
+        padding: 0.75rem 1rem;
+        background: linear-gradient(135deg, var(--light-gray) 0%, #ffffff 100%);
+        border-left: 4px solid var(--secondary-blue);
+        border-radius: 8px;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-parameter-group {
+        background: #fafbfc;
+        border: 1px solid var(--medium-gray);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-parameter-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-blue);
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--medium-gray);
+    }
+
+    .model-equation-container {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        text-align: center;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-interpretation-list {
+        background: white;
+        border: 1px solid var(--medium-gray);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-interpretation-list ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+
+    .model-interpretation-list li {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+        color: var(--text-primary);
+    }
+
+    .model-comparison-table {
+        background: white;
+        border: 1px solid var(--medium-gray);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-comparison-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .model-comparison-table th {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        color: white;
+        padding: 1rem 0.75rem;
+        font-weight: 600;
+        text-align: left;
+        border-bottom: 2px solid var(--medium-gray);
+    }
+
+    .model-comparison-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--medium-gray);
+        vertical-align: middle;
+        color: var(--text-primary);
+    }
+
+    .model-comparison-table tr:hover {
+        background-color: var(--light-gray);
+    }
+
+    .model-highlight-box {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        border: 1px solid var(--secondary-blue);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-highlight-box h4 {
+        color: var(--primary-blue);
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .model-code-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-energy-indicator {
+        /* Base class for energy indicators - specific styling in subclasses */
+    }
+
+    .model-energy-useful {
+        background: var(--useful-energy-light);
+        color: var(--useful-energy-dark);
+        border: 1px solid var(--useful-energy);
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin: 0.25rem;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .model-energy-losses {
+        background: var(--energy-losses-light);
+        color: var(--energy-losses-dark);
+        border: 1px solid var(--energy-losses);
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin: 0.25rem;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    /* Professional typography for model explanation */
+    .model-explanation-container p {
+        line-height: 1.7;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    .model-explanation-container strong {
+        color: var(--primary-blue);
+        font-weight: 600;
+    }
+
+    .model-explanation-container em {
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    /* Responsive design for model explanation */
+    @media (max-width: 768px) {
+        .model-explanation-container {
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .model-section-title {
+            font-size: 1.5rem;
+        }
+
+        .model-subsection-title {
+            font-size: 1.2rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .model-parameter-group {
+            padding: 1rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -879,23 +1102,33 @@ def load_multiple_configurations_from_file(uploaded_file):
 def show_physical_model_explanation():
     """Muestra la explicación detallada del modelo físico"""
 
-    st.markdown('<div class="main-header">Modelo Físico del Rotary Cutter</div>',
-                unsafe_allow_html=True)
+    # Header principal con diseño profesional
+    st.markdown("""
+    <div class="model-explanation-container">
+        <div class="model-section-title">
+            <span class="icon-microscope"></span>
+            Modelo físico del sistema de corte
+        </div>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0;">
+            Documentación técnica completa del modelo matemático y físico del sistema de corte rotativo
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Botón para volver a la interfaz principal
-    col1, col2, col3 = st.columns([1, 2, 1])
+    _, col2, _ = st.columns([1, 2, 1])
     with col2:
-        if st.button("Volver a Simulación", use_container_width=True):
+        if st.button("← Volver a Simulación", use_container_width=True, type="secondary"):
             st.session_state.show_model_explanation = False
             st.rerun()
 
-    # Crear pestañas para organizar la información
+    # Crear pestañas para organizar la información de forma profesional
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "Fundamentos Teóricos",
-        "Ecuaciones Diferenciales",
-        "Parámetros Físicos",
-        "Método Numérico",
-        "Métricas de Rendimiento"
+        "Fundamentos teóricos",
+        "Ecuaciones diferenciales",
+        "Parámetros físicos",
+        "Método numérico",
+        "Métricas de rendimiento"
     ])
 
     with tab1:
@@ -915,182 +1148,294 @@ def show_physical_model_explanation():
 
 
 def show_theoretical_foundations():
-    """Muestra los fundamentos teóricos del modelo"""
+    """Muestra los fundamentos teóricos del modelo con diseño profesional"""
 
-    st.markdown("## Fundamentos Teóricos del Sistema")
+    # Principios Físicos Fundamentales section
+    principles_section = create_section_header(
+        "Principios Físicos Fundamentales",
+        "El modelo del rotary cutter se basa en los principios fundamentales de la <strong>mecánica rotacional</strong> y la <strong>dinámica de sistemas mecánicos</strong>. El sistema se modela como un <strong>cuerpo rígido rotante</strong> sometido a múltiples torques que actúan sobre él."
+    )
 
-    st.markdown("""
-    ### Principios Físicos Fundamentales
+    # Create highlight box for modeling approach
+    modeling_highlight = create_highlight_box(
+        "Enfoque de Modelado",
+        "Se utiliza un enfoque de <em>sistemas dinámicos</em> donde el comportamiento del rotary cutter se describe mediante ecuaciones diferenciales ordinarias que relacionan las fuerzas y torques actuantes con el movimiento resultante del sistema."
+    )
 
-    El modelo del rotary cutter se basa en los principios fundamentales de la **mecánica rotacional**
-    y la **dinámica de sistemas mecánicos**. El sistema se modela como un **cuerpo rígido rotante**
-    sometido a múltiples torques que actúan sobre él.
-    """)
+    st.markdown(principles_section + modeling_highlight + "</div>", unsafe_allow_html=True)
 
-    # Diagrama conceptual usando texto
-    st.markdown("""
-    ### Diagrama Conceptual del Sistema
+    # Flujo de Energía section (removed diagram as requested)
+    energy_section = create_section_header(
+        "Flujo de Energía del Sistema",
+        "El sistema de corte rotativo opera mediante un flujo de energía claramente definido desde la entrada del motor hasta la utilización en el corte de vegetación:"
+    )
+    st.markdown(energy_section, unsafe_allow_html=True)
 
-    ```
-    ┌─────────────────────────────────────────────────────────────┐
-    │                    ROTARY CUTTER SYSTEM                    │
-    │                                                             │
-    │    Motor ──→ τ_input ──→ [PLATO + CUCHILLAS] ──→ Corte     │
-    │                              │                              │
-    │                              ↓                              │
-    │                         Resistencias:                      │
-    │                         • Fricción viscosa (b·ω)           │
-    │                         • Arrastre aerodinámico (c·ω²)     │
-    │                         • Resistencia vegetal (τ_grass)    │
-    └─────────────────────────────────────────────────────────────┘
-    ```
-    """)
+    # Energy flow interpretation using helper function
+    energy_flow_items = [
+        "<strong>Entrada:</strong> Energía mecánica del motor (τ_input)",
+        "<strong>Transformación:</strong> Conversión a energía cinética rotacional",
+        "<strong>Utilización:</strong> Trabajo de corte de vegetación",
+        "<strong>Pérdidas:</strong> Fricción, arrastre aerodinámico y resistencias"
+    ]
+    energy_flow_content = create_interpretation_list("Flujo de Energía", energy_flow_items)
+    st.markdown(energy_flow_content + "</div>", unsafe_allow_html=True)
 
-    st.markdown("""
-    ### Ley Fundamental: Segunda Ley de Newton para Rotación
+    # Ley fundamental con diseño profesional
+    newton_section = create_section_header(
+        "Ley Fundamental: Segunda Ley de Newton para Rotación",
+        "El comportamiento dinámico del sistema se rige por la <strong>segunda ley de Newton para movimiento rotacional</strong>:"
+    )
+    st.markdown(newton_section, unsafe_allow_html=True)
 
-    El comportamiento dinámico del sistema se rige por la **segunda ley de Newton para movimiento rotacional**:
+    # Newton's law equation using LaTeX for consistency
+    st.latex(r"I \cdot \alpha = \sum \tau")
 
-    **I · α = Σ τ**
+    # Variable definitions using helper function
+    variable_items = [
+        "<strong>I:</strong> Momento de inercia total del sistema [kg·m²]",
+        "<strong>α:</strong> Aceleración angular [rad/s²]",
+        "<strong>Σ τ:</strong> Suma algebraica de todos los torques actuantes [N·m]"
+    ]
+    variables_content = create_interpretation_list("Definición de Variables", variable_items)
+    st.markdown(variables_content + "</div>", unsafe_allow_html=True)
 
-    Donde:
-    - **I**: Momento de inercia total del sistema [kg·m²]
-    - **α**: Aceleración angular [rad/s²]
-    - **Σ τ**: Suma algebraica de todos los torques actuantes [N·m]
-    """)
+    # Componentes del sistema
+    components_section = create_section_header("Componentes del Sistema")
+    st.markdown(components_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    ### Componentes del Sistema
+    # 1. Momento de Inercia Total
+    inertia_description = "El sistema está compuesto por dos elementos principales:"
+    inertia_items = [
+        "<strong>Plato central:</strong> Disco de masa concentrada con distribución uniforme",
+        "<strong>Cuchillas:</strong> Masas puntuales ubicadas en los extremos del radio"
+    ]
+    inertia_content = create_parameter_group(
+        "1. Momento de Inercia Total (I_total)",
+        f"<p>{inertia_description}</p><ul>{''.join([f'<li>{item}</li>' for item in inertia_items])}</ul>"
+    )
+    st.markdown(inertia_content, unsafe_allow_html=True)
 
-    #### 1. **Momento de Inercia Total (I_total)**
-    El sistema está compuesto por:
-    - **Plato central**: Disco de masa concentrada
-    - **Cuchillas**: Masas puntuales en los extremos
+    # 2. Torques Actuantes using professional grid layout
+    torques_content = create_parameter_group(
+        "2. Torques Actuantes",
+        """
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+            <div>
+                <div class="model-energy-useful">τ_input: Torque motor (entrada de energía)</div>
+            </div>
+            <div>
+                <div class="model-energy-losses">τ_friction: Fricción viscosa en rodamientos</div>
+            </div>
+            <div>
+                <div class="model-energy-losses">τ_drag: Arrastre aerodinámico</div>
+            </div>
+            <div>
+                <div class="model-energy-useful">τ_grass: Resistencia por corte de vegetación</div>
+            </div>
+        </div>
+        """
+    )
+    st.markdown(torques_content, unsafe_allow_html=True)
 
-    #### 2. **Torques Actuantes**
-    - **τ_input**: Torque motor (entrada de energía)
-    - **τ_friction**: Fricción viscosa en rodamientos
-    - **τ_drag**: Arrastre aerodinámico
-    - **τ_grass**: Resistencia por corte de vegetación
-    """)
+    st.markdown("</div>", unsafe_allow_html=True)  # Close components section
 
+
+def create_section_header(title, description=""):
+    """Helper function to create consistent section headers"""
+    return f"""
+    <div class="model-explanation-container">
+        <div class="model-subsection-title">{title}</div>
+        {f'<p>{description}</p>' if description else ''}
+    """
+
+def create_parameter_group(title, content):
+    """Helper function to create parameter groups with consistent styling"""
+    return f"""
+        <div class="model-parameter-group">
+            <div class="model-parameter-title">{title}</div>
+            {content}
+        </div>
+    """
+
+def create_interpretation_list(title, items):
+    """Helper function to create interpretation lists"""
+    items_html = ''.join([f'<li>{item}</li>' for item in items])
+    return f"""
+        <div class="model-interpretation-list">
+            <strong>{title}:</strong>
+            <ul>
+                {items_html}
+            </ul>
+        </div>
+    """
+
+def create_highlight_box(title, content):
+    """Helper function to create highlight boxes"""
+    return f"""
+        <div class="model-highlight-box">
+            <h4>{title}</h4>
+            <p>{content}</p>
+        </div>
+    """
+
+def validate_html_structure(html_content):
+    """Validates HTML structure for proper tag closure and nesting"""
+    import re
+
+    # Extract all HTML tags
+    tags = re.findall(r'<(/?)(\w+)[^>]*>', html_content)
+
+    stack = []
+    errors = []
+
+    for is_closing, tag_name in tags:
+        if is_closing:  # Closing tag
+            if not stack:
+                errors.append(f"Closing tag </{tag_name}> without opening tag")
+            elif stack[-1] != tag_name:
+                errors.append(f"Mismatched tags: expected </{stack[-1]}>, found </{tag_name}>")
+            else:
+                stack.pop()
+        else:  # Opening tag
+            # Skip self-closing tags
+            if tag_name.lower() not in ['br', 'hr', 'img', 'input', 'meta', 'link']:
+                stack.append(tag_name)
+
+    # Check for unclosed tags
+    for tag in stack:
+        errors.append(f"Unclosed tag: <{tag}>")
+
+    return len(errors) == 0, errors
 
 def show_differential_equations():
-    """Muestra las ecuaciones diferenciales del sistema"""
+    """Muestra las ecuaciones diferenciales del sistema con diseño profesional"""
 
-    st.markdown("## Sistema de Ecuaciones Diferenciales")
+    # Variables de Estado section
+    variables_section = create_section_header(
+        "Variables de Estado",
+        "El sistema se describe mediante <strong>dos variables de estado</strong> que definen completamente el estado dinámico del rotary cutter en cualquier instante:"
+    )
 
-    st.markdown("""
-    ### Variables de Estado
+    variables_content = """
+        <div class="model-parameter-group">
+            <ul>
+                <li><strong>θ(t):</strong> Posición angular del plato [rad]</li>
+                <li><strong>ω(t):</strong> Velocidad angular del plato [rad/s]</li>
+            </ul>
+        </div>
+    """
 
-    El sistema se describe mediante **dos variables de estado**:
+    highlight_content = create_highlight_box(
+        "Representación de Estado",
+        "Esta formulación permite transformar una ecuación diferencial de segundo orden en un sistema de dos ecuaciones de primer orden, facilitando la integración numérica y el análisis del sistema."
+    )
 
-    - **θ(t)**: Posición angular del plato [rad]
-    - **ω(t)**: Velocidad angular del plato [rad/s]
-    """)
+    st.markdown(variables_section + variables_content + highlight_content + "</div>", unsafe_allow_html=True)
 
-    st.markdown("""
-    ### Sistema de EDOs de Primer Orden
+    # Sistema de EDOs principal
+    ode_section = create_section_header(
+        "Sistema de Ecuaciones Diferenciales Ordinarias",
+        "El modelo se formula como un sistema de ecuaciones diferenciales ordinarias de primer orden:"
+    )
 
-    El modelo se formula como un sistema de ecuaciones diferenciales ordinarias de primer orden:
-    """)
+    st.markdown(ode_section, unsafe_allow_html=True)
 
-    # Mostrar las ecuaciones principales
+    # Main differential equations using LaTeX
     st.latex(r'''
     \begin{cases}
-    \frac{d\theta}{dt} = \omega \\[0.5em]
+    \frac{d\theta}{dt} = \omega \\[0.8em]
     \frac{d\omega}{dt} = \frac{\tau_{input} - \tau_{friction} - \tau_{drag} - \tau_{grass}}{I_{total}}
     \end{cases}
     ''')
 
-    st.markdown("""
-    ### Desglose de Cada Término
+    interpretation_items = [
+        "<strong>Primera ecuación:</strong> Define la relación cinemática entre posición y velocidad angular",
+        "<strong>Segunda ecuación:</strong> Aplica la segunda ley de Newton para rotación (balance de torques)"
+    ]
 
-    #### **1. Momento de Inercia Total**
-    """)
+    interpretation_content = create_interpretation_list("Interpretación Física", interpretation_items)
+    st.markdown(interpretation_content + "</div>", unsafe_allow_html=True)
 
-    st.latex(r'''
-    I_{total} = I_{plate} + n_{blades} \cdot m_c \cdot (R + L)^2
-    ''')
+    # Desglose detallado de términos
+    detailed_section = create_section_header("Desglose Detallado de Cada Término")
+    st.markdown(detailed_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    Donde:
-    - **I_plate**: Momento de inercia del plato central
-    - **n_blades**: Número de cuchillas
-    - **m_c**: Masa de cada cuchilla
-    - **R**: Radio al punto de fijación de la cuchilla
-    - **L**: Longitud de la cuchilla desde el punto de fijación
-    """)
+    # 1. Momento de Inercia Total
+    st.markdown('<div class="model-parameter-group"><div class="model-parameter-title">1. Momento de Inercia Total</div>', unsafe_allow_html=True)
+    st.latex(r'''I_{total} = I_{plate} + n_{blades} \cdot m_c \cdot (R + L)^2''')
 
-    st.markdown("""
-    #### **2. Torque de Fricción Viscosa**
-    """)
+    inertia_items = [
+        "<strong>I_plate:</strong> Momento de inercia del plato central [kg·m²]",
+        "<strong>n_blades:</strong> Número de cuchillas [adimensional]",
+        "<strong>m_c:</strong> Masa de cada cuchilla [kg]",
+        "<strong>R:</strong> Radio al punto de fijación de la cuchilla [m]",
+        "<strong>L:</strong> Longitud de la cuchilla desde el punto de fijación [m]"
+    ]
+    inertia_content = create_interpretation_list("Componentes", inertia_items)
+    st.markdown(inertia_content + "</div>", unsafe_allow_html=True)
 
-    st.latex(r'''
-    \tau_{friction} = b \cdot \omega
-    ''')
+    # 2. Torque de Fricción Viscosa
+    st.markdown('<div class="model-parameter-group"><div class="model-parameter-title">2. Torque de Fricción Viscosa</div>', unsafe_allow_html=True)
+    st.latex(r'''\tau_{friction} = b \cdot \omega''')
 
-    st.markdown("""
-    - **b**: Coeficiente de fricción viscosa [N·m·s/rad]
-    - Representa pérdidas en rodamientos y sellos
-    - **Proporcional a la velocidad angular**
-    """)
+    friction_items = [
+        "<strong>b:</strong> Coeficiente de fricción viscosa [N·m·s/rad]",
+        "<strong>Origen físico:</strong> Pérdidas en rodamientos, sellos y lubricación",
+        "<strong>Dependencia:</strong> Proporcional a la velocidad angular",
+        "<strong>Efecto:</strong> Siempre opuesto al movimiento (disipativo)"
+    ]
+    friction_content = create_interpretation_list("Características", friction_items)
+    st.markdown(friction_content + "</div>", unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **3. Torque de Arrastre Aerodinámico**
-    """)
+    # 3. Torque de Arrastre Aerodinámico
+    st.markdown('<div class="model-parameter-group"><div class="model-parameter-title">3. Torque de Arrastre Aerodinámico</div>', unsafe_allow_html=True)
+    st.latex(r'''\tau_{drag} = c_{drag} \cdot \omega^2 \cdot \text{sign}(\omega)''')
 
-    st.latex(r'''
-    \tau_{drag} = c_{drag} \cdot \omega^2 \cdot \text{sign}(\omega)
-    ''')
+    drag_items = [
+        "<strong>c_drag:</strong> Coeficiente de arrastre aerodinámico [N·m·s²/rad²]",
+        "<strong>Origen físico:</strong> Resistencia del aire y turbulencia",
+        "<strong>Dependencia:</strong> Proporcional al cuadrado de la velocidad angular",
+        "<strong>Función sign():</strong> Preserva la dirección del torque resistivo"
+    ]
+    drag_content = create_interpretation_list("Características", drag_items)
+    st.markdown(drag_content + "</div></div>", unsafe_allow_html=True)  # Close detailed section
 
-    st.markdown("""
-    - **c_drag**: Coeficiente de arrastre aerodinámico [N·m·s²/rad²]
-    - Representa resistencia del aire
-    - **Proporcional al cuadrado de la velocidad angular**
-    - La función sign() preserva la dirección del torque resistivo
-    """)
+    # 4. Torque de Resistencia Vegetal
+    vegetation_section = create_section_header("4. Torque de Resistencia Vegetal")
+    st.markdown(vegetation_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **4. Torque de Resistencia Vegetal**
+    # Modelo Constante
+    st.markdown('<div class="model-parameter-group"><div class="model-parameter-title">Modelo Constante (Clásico)</div>', unsafe_allow_html=True)
+    st.latex(r'''\tau_{grass} = k_{grass} \cdot \rho_{veg} \cdot v_{avance} \cdot R''')
+    st.markdown('<p>Aplicable cuando la densidad de vegetación es uniforme en el área de trabajo.</p></div>', unsafe_allow_html=True)
 
-    **Modelo Constante:**
-    """)
+    # Modelo Variable Espacial
+    st.markdown('<div class="model-parameter-group"><div class="model-parameter-title">Modelo Variable Espacial (Avanzado)</div>', unsafe_allow_html=True)
+    st.latex(r'''\tau_{grass}(t) = k_{grass} \cdot \rho(x(t)) \cdot R''')
+    st.latex(r'''\text{donde } x(t) = v_{avance} \cdot t''')
+    st.markdown('<p>Permite modelar variaciones espaciales en la densidad de vegetación.</p></div>', unsafe_allow_html=True)
 
-    st.latex(r'''
-    \tau_{grass} = k_{grass} \cdot \rho_{veg} \cdot v_{avance} \cdot R
-    ''')
-
-    st.markdown("""
-    **Modelo Variable Espacial:**
-    """)
-
-    st.latex(r'''
-    \tau_{grass}(t) = k_{grass} \cdot \rho(x(t)) \cdot R
-    ''')
-
-    st.latex(r'''
-    \text{donde } x(t) = v_{avance} \cdot t
-    ''')
-
-    st.markdown("""
-    - **k_grass**: Constante de resistencia vegetal [N·s/m]
-    - **ρ_veg** o **ρ(x)**: Densidad de vegetación [kg/m²]
-    - **v_avance**: Velocidad de avance del equipo [m/s]
-    - **R**: Radio efectivo de corte [m]
-    """)
+    # Parámetros del modelo
+    vegetation_params = [
+        "<strong>k_grass:</strong> Constante de resistencia vegetal [N·s/m]",
+        "<strong>ρ_veg o ρ(x):</strong> Densidad de vegetación [kg/m²]",
+        "<strong>v_avance:</strong> Velocidad de avance del equipo [m/s]",
+        "<strong>R:</strong> Radio efectivo de corte [m]"
+    ]
+    vegetation_content = create_interpretation_list("Parámetros del Modelo", vegetation_params)
+    st.markdown(vegetation_content + "</div>", unsafe_allow_html=True)  # Close vegetation section
 
 
 def show_physical_parameters():
-    """Muestra la explicación detallada de los parámetros físicos"""
+    """Muestra la explicación detallada de los parámetros físicos con diseño profesional"""
 
-    st.markdown("## Parámetros Físicos del Sistema")
-
-    st.markdown("""
-    ### Clasificación de Parámetros
-
-    Los parámetros del modelo se clasifican en **cuatro categorías principales**:
-    """)
+    # Header section with professional styling
+    header_section = create_section_header(
+        "Parámetros Físicos del Sistema",
+        "Los parámetros del modelo se clasifican en cuatro categorías principales,que definen completamente el comportamiento del sistema de corte rotativo."
+    )
+    st.markdown(header_section + "</div>", unsafe_allow_html=True)
 
     # Crear pestañas para organizar los parámetros
     tab1, tab2, tab3, tab4 = st.tabs([
@@ -1114,201 +1459,315 @@ def show_physical_parameters():
 
 
 def show_geometric_parameters():
-    """Muestra los parámetros geométricos del sistema"""
+    """Muestra los parámetros geométricos del sistema con diseño profesional"""
 
-    st.markdown("### Parámetros Geométricos")
+    # Header section
+    header_section = create_section_header("Parámetros Geométricos")
+    st.markdown(header_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **R - Radio Principal [m]**
-    - **Definición**: Radio desde el centro del plato hasta el punto de fijación de las cuchillas
-    - **Rango típico**: 0.3 - 1.2 m
-    - **Impacto**: Determina el momento de inercia y la velocidad lineal de corte
-    - **Relación**: Velocidad lineal = ω × R
-    """)
+    # R - Radio Principal
+    radius_content = create_parameter_group(
+        "R - Radio Principal [m]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Radio desde el centro del plato hasta el punto de fijación de las cuchillas</li>
+            <li><strong>Rango típico:</strong> 0.3 - 1.2 m</li>
+            <li><strong>Impacto:</strong> Determina el momento de inercia y la velocidad lineal de corte</li>
+        </ul>
+        """
+    )
+    st.markdown(radius_content, unsafe_allow_html=True)
 
+    # LaTeX equation for linear velocity
     st.latex(r"v_{linear} = \omega \times R")
 
-    st.markdown("""
-    #### **L - Longitud de Cuchilla [m]**
-    - **Definición**: Longitud de cada cuchilla desde el punto de fijación hasta la punta
-    - **Cálculo**: L = R × (L_percent / 100)
-    - **Rango típico**: 10% - 100% del radio principal
-    - **Impacto**: Afecta el momento de inercia de las cuchillas y el ancho de corte efectivo
-    """)
+    # L - Longitud de Cuchilla
+    length_content = create_parameter_group(
+        "L - Longitud de Cuchilla [m]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Longitud de cada cuchilla desde el punto de fijación hasta la punta</li>
+            <li><strong>Cálculo:</strong> L = R × (L_percent / 100)</li>
+            <li><strong>Rango típico:</strong> 10% - 100% del radio principal</li>
+            <li><strong>Impacto:</strong> Afecta el momento de inercia de las cuchillas y el ancho de corte efectivo</li>
+        </ul>
+        """
+    )
+    st.markdown(length_content, unsafe_allow_html=True)
 
+    # LaTeX equation for blade inertia
     st.latex(r"I_{blades} = n_{blades} \times m_c \times (R + L)^2")
 
-    st.markdown("""
-    #### **w - Ancho de Corte [m]**
-    - **Definición**: Ancho total de la franja cortada por el equipo
-    - **Rango típico**: 1.5 - 3.0 m (equipos agrícolas estándar)
-    - **Impacto**: Determina el área cortada por unidad de tiempo
-    - **Relación**: Área cortada = w × v_avance × t
-    """)
+    # w - Ancho de Corte
+    width_content = create_parameter_group(
+        "w - Ancho de Corte [m]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Ancho total de la franja cortada por el equipo</li>
+            <li><strong>Rango típico:</strong> 1.5 - 3.0 m (equipos agrícolas estándar)</li>
+            <li><strong>Impacto:</strong> Determina el área cortada por unidad de tiempo</li>
+        </ul>
+        """
+    )
+    st.markdown(width_content, unsafe_allow_html=True)
+
+    # LaTeX equation for cutting area
+    st.latex(r"A_{cortada} = w \times v_{avance} \times t")
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close header section
 
 
 def show_mass_inertial_parameters():
-    """Muestra los parámetros másicos e inerciales"""
+    """Muestra los parámetros másicos e inerciales con diseño profesional"""
 
-    st.markdown("### Parámetros Másicos e Inerciales")
+    # Header section
+    header_section = create_section_header(
+        "Parámetros Másicos e Inerciales",
+        "El sistema divide la masa total en dos componentes principales con diferentes modelos físicos:"
+    )
+    st.markdown(header_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **Distribución de Masa**
-
-    El sistema divide la masa total en dos componentes principales:
-    """)
-
+    # Distribución de masa en columnas
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
-        **Plato Central:**
-        - Masa: m_plate = mass × (mass_plate_percent / 100)
-        - Momento de inercia: I_plate = 0.5 × m_plate × R²
-        - Modelo: Disco sólido uniforme
-        """)
+        plate_content = create_parameter_group(
+            "Plato Central",
+            """
+            <ul>
+                <li><strong>Masa:</strong> m_plate = mass × (mass_plate_percent / 100)</li>
+                <li><strong>Momento de inercia:</strong> I_plate = 0.5 × m_plate × R²</li>
+                <li><strong>Modelo:</strong> Disco sólido uniforme</li>
+            </ul>
+            """
+        )
+        st.markdown(plate_content, unsafe_allow_html=True)
 
     with col2:
-        st.markdown("""
-        **Cuchillas:**
-        - Masa total: m_blades = mass - m_plate
-        - Masa por cuchilla: m_c = m_blades / n_blades
-        - Modelo: Masas puntuales en los extremos
-        """)
+        blades_content = create_parameter_group(
+            "Cuchillas",
+            """
+            <ul>
+                <li><strong>Masa total:</strong> m_blades = mass - m_plate</li>
+                <li><strong>Masa por cuchilla:</strong> m_c = m_blades / n_blades</li>
+                <li><strong>Modelo:</strong> Masas puntuales en los extremos</li>
+            </ul>
+            """
+        )
+        st.markdown(blades_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **I_total - Momento de Inercia Total [kg·m²]**
+    # Momento de Inercia Total
+    inertia_content = create_parameter_group(
+        "I_total - Momento de Inercia Total [kg·m²]",
+        "El momento de inercia total combina las contribuciones del plato y las cuchillas:"
+    )
+    st.markdown(inertia_content, unsafe_allow_html=True)
 
-    El momento de inercia total combina las contribuciones del plato y las cuchillas:
-    """)
-
+    # LaTeX equations for total inertia
     st.latex(r"I_{total} = I_{plate} + I_{blades}")
     st.latex(r"I_{total} = \frac{1}{2} m_{plate} R^2 + n_{blades} \times m_c \times (R + L)^2")
 
-    st.markdown("""
-    **Justificación del Modelo:**
-    - **Plato**: Se modela como disco sólido porque la masa está distribuida uniformemente
-    - **Cuchillas**: Se modelan como masas puntuales porque son delgadas y la masa se concentra en los extremos
-    - **Teorema de Steiner**: Las cuchillas están a distancia (R + L) del centro de rotación
-    """)
+    # Justificación del modelo
+    justification_items = [
+        "<strong>Plato:</strong> Se modela como disco sólido porque la masa está distribuida uniformemente",
+        "<strong>Cuchillas:</strong> Se modelan como masas puntuales porque son delgadas y la masa se concentra en los extremos",
+        "<strong>Teorema de Steiner:</strong> Las cuchillas están a distancia (R + L) del centro de rotación"
+    ]
+    justification_content = create_interpretation_list("Justificación del Modelo", justification_items)
+    st.markdown(justification_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **n_blades - Número de Cuchillas**
-    - **Rango típico**: 2 - 12 cuchillas
-    - **Impacto**: Afecta el momento de inercia total y la distribución de masa
-    - **Consideración**: Más cuchillas = mayor inercia pero mejor distribución de carga
-    """)
+    # Número de cuchillas
+    blades_number_content = create_parameter_group(
+        "n_blades - Número de Cuchillas",
+        """
+        <ul>
+            <li><strong>Rango típico:</strong> 2 - 12 cuchillas</li>
+            <li><strong>Impacto:</strong> Afecta el momento de inercia total y la distribución de masa</li>
+            <li><strong>Consideración:</strong> Más cuchillas = mayor inercia pero mejor distribución de carga</li>
+        </ul>
+        """
+    )
+    st.markdown(blades_number_content, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close header section
 
 
 def show_vegetation_parameters():
-    """Muestra los parámetros de vegetación y corte"""
+    """Muestra los parámetros de vegetación y corte con diseño profesional"""
 
-    st.markdown("### Parámetros de Vegetación y Corte")
+    # Header section
+    header_section = create_section_header("Parámetros de Vegetación y Corte")
+    st.markdown(header_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **ρ_veg - Densidad de Vegetación [kg/m²]**
-    - **Definición**: Masa de vegetación por unidad de área
-    - **Rango típico**: 0.5 - 3.0 kg/m² (pasto, maleza ligera a densa)
-    - **Variabilidad**: Puede ser constante o variable espacialmente
-    - **Impacto**: Determina directamente la resistencia al corte
-    """)
+    # ρ_veg - Densidad de Vegetación
+    density_content = create_parameter_group(
+        "ρ_veg - Densidad de Vegetación [kg/m²]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Masa de vegetación por unidad de área</li>
+            <li><strong>Rango típico:</strong> 0.5 - 3.0 kg/m² (pasto, maleza ligera a densa)</li>
+            <li><strong>Variabilidad:</strong> Puede ser constante o variable espacialmente</li>
+            <li><strong>Impacto:</strong> Determina directamente la resistencia al corte</li>
+        </ul>
+        """
+    )
+    st.markdown(density_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **k_grass - Constante de Resistencia Vegetal [N·s/m]**
-    - **Definición**: Factor que relaciona la densidad vegetal con el torque resistivo
-    - **Rango típico**: 10 - 30 N·s/m
-    - **Dependencias**: Tipo de vegetación, humedad, altura, dureza
-    - **Calibración**: Se determina experimentalmente para cada tipo de cultivo
-    """)
+    # k_grass - Constante de Resistencia Vegetal
+    resistance_content = create_parameter_group(
+        "k_grass - Constante de Resistencia Vegetal [N·s/m]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Factor que relaciona la densidad vegetal con el torque resistivo</li>
+            <li><strong>Rango típico:</strong> 10 - 30 N·s/m</li>
+            <li><strong>Dependencias:</strong> Tipo de vegetación, humedad, altura, dureza</li>
+            <li><strong>Calibración:</strong> Se determina experimentalmente para cada tipo de cultivo</li>
+        </ul>
+        """
+    )
+    st.markdown(resistance_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **v_avance - Velocidad de Avance [m/s]**
-    - **Definición**: Velocidad de desplazamiento del equipo sobre el terreno
-    - **Rango típico**: 1.5 - 6.0 m/s (5.4 - 21.6 km/h)
-    - **Impacto**: Afecta la tasa de encuentro con nueva vegetación
-    - **Relación**: Potencia requerida ∝ v_avance
-    """)
+    # v_avance - Velocidad de Avance
+    velocity_content = create_parameter_group(
+        "v_avance - Velocidad de Avance [m/s]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Velocidad de desplazamiento del equipo sobre el terreno</li>
+            <li><strong>Rango típico:</strong> 1.5 - 6.0 m/s (5.4 - 21.6 km/h)</li>
+            <li><strong>Impacto:</strong> Afecta la tasa de encuentro con nueva vegetación</li>
+            <li><strong>Relación:</strong> Potencia requerida ∝ v_avance</li>
+        </ul>
+        """
+    )
+    st.markdown(velocity_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **Modelo de Resistencia Vegetal**
+    # Modelo de Resistencia Vegetal
+    model_content = create_parameter_group(
+        "Modelo de Resistencia Vegetal",
+        "<strong>Modelo Básico (Constante):</strong>"
+    )
+    st.markdown(model_content, unsafe_allow_html=True)
 
-    **Modelo Básico (Constante):**
-    """)
-
+    # LaTeX equation for basic model
     st.latex(r"\tau_{grass} = k_{grass} \times \rho_{veg} \times v_{avance} \times R")
 
-    st.markdown("""
-    **Modelo Avanzado (Variable Espacial):**
-    """)
+    st.markdown('<p><strong>Modelo Avanzado (Variable Espacial):</strong></p>', unsafe_allow_html=True)
 
+    # LaTeX equations for advanced model
     st.latex(r"\tau_{grass}(t) = k_{grass} \times \rho(x(t)) \times R")
     st.latex(r"\text{donde } x(t) = v_{avance} \times t")
 
-    st.markdown("""
-    **Justificación Física:**
-    - El torque es proporcional a la densidad de vegetación encontrada
-    - La velocidad de avance determina la tasa de encuentro con nueva vegetación
-    - El radio R amplifica el efecto debido al brazo de palanca
-    """)
+    # Justificación física
+    justification_items = [
+        "El torque es proporcional a la densidad de vegetación encontrada",
+        "La velocidad de avance determina la tasa de encuentro con nueva vegetación",
+        "El radio R amplifica el efecto debido al brazo de palanca"
+    ]
+    justification_content = create_interpretation_list("Justificación Física", justification_items)
+    st.markdown(justification_content, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close header section
 
 
 def show_dynamic_parameters():
-    """Muestra los parámetros dinámicos del sistema"""
+    """Muestra los parámetros dinámicos del sistema con diseño profesional"""
 
-    st.markdown("### Parámetros Dinámicos")
+    # Header section
+    header_section = create_section_header("Parámetros Dinámicos")
+    st.markdown(header_section, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **τ_input - Torque del Motor [N·m]**
-    - **Definición**: Torque de entrada proporcionado por el motor
-    - **Rango típico**: 100 - 500 N·m (equipos agrícolas)
-    - **Características**: Generalmente constante o controlado
-    - **Limitaciones**: Potencia máxima del motor, eficiencia de transmisión
-    """)
+    # τ_input - Torque del Motor
+    torque_content = create_parameter_group(
+        "τ_input - Torque del Motor [N·m]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Torque de entrada proporcionado por el motor</li>
+            <li><strong>Rango típico:</strong> 100 - 500 N·m (equipos agrícolas)</li>
+            <li><strong>Características:</strong> Generalmente constante o controlado</li>
+            <li><strong>Limitaciones:</strong> Potencia máxima del motor, eficiencia de transmisión</li>
+        </ul>
+        """
+    )
+    st.markdown(torque_content, unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **b - Coeficiente de Fricción Viscosa [N·m·s/rad]**
-    - **Definición**: Resistencia proporcional a la velocidad angular
-    - **Fuentes físicas**: Rodamientos, sellos, lubricación
-    - **Rango típico**: 0.1 - 1.0 N·m·s/rad
-    - **Modelo**: τ_friction = b × ω
-    """)
+    # b - Coeficiente de Fricción Viscosa
+    friction_content = create_parameter_group(
+        "b - Coeficiente de Fricción Viscosa [N·m·s/rad]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Resistencia proporcional a la velocidad angular</li>
+            <li><strong>Fuentes físicas:</strong> Rodamientos, sellos, lubricación</li>
+            <li><strong>Rango típico:</strong> 0.1 - 1.0 N·m·s/rad</li>
+            <li><strong>Modelo:</strong> τ_friction = b × ω</li>
+        </ul>
+        """
+    )
+    st.markdown(friction_content, unsafe_allow_html=True)
 
+    # LaTeX equation for friction
     st.latex(r"\tau_{friction} = b \times \omega")
 
-    st.markdown("""
-    **Justificación:** La fricción viscosa es dominante a altas velocidades y es característica de sistemas con lubricación.
-    """)
+    st.markdown('<p><strong>Justificación:</strong> La fricción viscosa es dominante a altas velocidades y es característica de sistemas con lubricación.</p>', unsafe_allow_html=True)
 
-    st.markdown("""
-    #### **c_drag - Coeficiente de Arrastre Aerodinámico [N·m·s²/rad²]**
-    - **Definición**: Resistencia proporcional al cuadrado de la velocidad angular
-    - **Fuentes físicas**: Resistencia del aire, turbulencia
-    - **Rango típico**: 0.01 - 0.1 N·m·s²/rad²
-    - **Modelo**: τ_drag = c_drag × ω² × sign(ω)
-    """)
+    # c_drag - Coeficiente de Arrastre Aerodinámico
+    drag_content = create_parameter_group(
+        "c_drag - Coeficiente de Arrastre Aerodinámico [N·m·s²/rad²]",
+        """
+        <ul>
+            <li><strong>Definición:</strong> Resistencia proporcional al cuadrado de la velocidad angular</li>
+            <li><strong>Fuentes físicas:</strong> Resistencia del aire, turbulencia</li>
+            <li><strong>Rango típico:</strong> 0.01 - 0.1 N·m·s²/rad²</li>
+            <li><strong>Modelo:</strong> τ_drag = c_drag × ω² × sign(ω)</li>
+        </ul>
+        """
+    )
+    st.markdown(drag_content, unsafe_allow_html=True)
 
+    # LaTeX equation for drag
     st.latex(r"\tau_{drag} = c_{drag} \times \omega^2 \times \text{sign}(\omega)")
 
-    st.markdown("""
-    **Justificación:** El arrastre aerodinámico sigue la ley cuadrática típica de la mecánica de fluidos.
-    """)
+    st.markdown('<p><strong>Justificación:</strong> El arrastre aerodinámico sigue la ley cuadrática típica de la mecánica de fluidos.</p>', unsafe_allow_html=True)
 
-    st.markdown("""
-    ### Interacciones Entre Parámetros
+    st.markdown("</div>", unsafe_allow_html=True)  # Close header section
 
-    #### **Acoplamiento Geométrico-Inercial**
-    - Radio mayor → Mayor momento de inercia → Mayor inercia rotacional
-    - Más cuchillas → Mayor inercia → Respuesta más lenta
+    # Interacciones Entre Parámetros
+    interactions_section = create_section_header("Interacciones Entre Parámetros")
+    st.markdown(interactions_section, unsafe_allow_html=True)
 
-    #### **Acoplamiento Dinámico-Operacional**
-    - Mayor velocidad de avance → Mayor resistencia vegetal → Mayor torque requerido
-    - Mayor densidad vegetal → Mayor carga → Menor velocidad angular final
+    # Acoplamiento Geométrico-Inercial
+    geometric_content = create_parameter_group(
+        "Acoplamiento Geométrico-Inercial",
+        """
+        <ul>
+            <li>Radio mayor → Mayor momento de inercia → Mayor inercia rotacional</li>
+            <li>Más cuchillas → Mayor inercia → Respuesta más lenta</li>
+        </ul>
+        """
+    )
+    st.markdown(geometric_content, unsafe_allow_html=True)
 
-    #### **Compromiso de Diseño**
-    - **Eficiencia vs. Robustez**: Sistemas ligeros son más eficientes pero menos robustos
-    - **Velocidad vs. Calidad**: Mayor velocidad reduce calidad de corte
-    - **Potencia vs. Consumo**: Mayor potencia permite mayor productividad pero aumenta consumo
-    """)
+    # Acoplamiento Dinámico-Operacional
+    dynamic_content = create_parameter_group(
+        "Acoplamiento Dinámico-Operacional",
+        """
+        <ul>
+            <li>Mayor velocidad de avance → Mayor resistencia vegetal → Mayor torque requerido</li>
+            <li>Mayor densidad vegetal → Mayor carga → Menor velocidad angular final</li>
+        </ul>
+        """
+    )
+    st.markdown(dynamic_content, unsafe_allow_html=True)
+
+    # Compromiso de Diseño
+    design_items = [
+        "<strong>Eficiencia vs. Robustez:</strong> Sistemas ligeros son más eficientes pero menos robustos",
+        "<strong>Velocidad vs. Calidad:</strong> Mayor velocidad reduce calidad de corte",
+        "<strong>Potencia vs. Consumo:</strong> Mayor potencia permite mayor productividad pero aumenta consumo"
+    ]
+    design_content = create_interpretation_list("Compromiso de Diseño", design_items)
+    st.markdown(design_content, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close interactions section
 
 
 def show_numerical_method():
@@ -2597,7 +3056,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # Título principal
-    st.markdown('<div class="main-header">ORC - Sistema de Optimización de Rotary Cutter</div>',
+    st.markdown('<div class="main-header">ORC - Optimización de Sistema de Corte</div>',
                 unsafe_allow_html=True)
 
     # Inicializar estado de la sesión
@@ -2940,17 +3399,17 @@ Config_Agricola,16.0,210.0,4,0.65,62.0,1.3,3.6,19.0,2.1"""
 
         # Botón para acceder a la explicación del modelo físico
         st.markdown('<div class="section-header icon-book">Documentación del Modelo</div>', unsafe_allow_html=True)
-        if st.button("Ver Explicación del Modelo Físico", use_container_width=True, type="secondary"):
+        if st.button("Ver explicación del modelo", use_container_width=True, type="secondary"):
             st.session_state.show_model_explanation = True
             st.rerun()
 
     # Área principal dividida en tabs con iconos profesionales
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "Configuración de Torque",
-        "Condiciones Iniciales",
+        "Configuración de torque",
+        "Condiciones iniciales",
         "Simulación",
-        "Resultados y Análisis",
-        "Análisis de Eficiencia"
+        "Resultados y análisis",
+        "Análisis de eficiencia"
     ])
 
     # Crear parámetros base
@@ -3013,14 +3472,14 @@ def configure_torque_tab(base_params, params_valid):
     torque_type = st.selectbox(
         "Tipo de Función de Torque",
         options=[
-            "Constante (Modelo Clásico)",
+            "Constante (Modelo clásico)",
             "Temporal - Sinusoidal",
             "Temporal - Escalón",
             "Temporal - Rampa",
             "Temporal - Exponencial",
-            "Espacial - Zonas Alternadas",
+            "Espacial - Zonas alternadas",
             "Espacial - Parches Gaussianos",
-            "Espacial - Transición Sigmoide",
+            "Espacial - Transición sigmoide",
             "Espacial - Sinusoidal",
             "Espacial - Terreno Complejo"
         ],
@@ -4503,7 +4962,7 @@ def display_efficiency_analysis(results, advanced_metrics):
             labels=['Energía Útil', 'Pérdidas'],
             values=[energy_useful, energy_losses],
             hole=0.4,
-            marker_colors=['#10b981', '#ef4444'],
+            marker_colors=['#10b981', '#ef4444'],  # User's preferred colors
             textinfo='label+percent+value',
             texttemplate='<b>%{label}</b><br>%{percent}<br>%{value:.1f} J',
             hovertemplate='<b>%{label}</b><br>Energía: %{value:.1f} J<br>Porcentaje: %{percent}<extra></extra>'
@@ -4570,16 +5029,16 @@ def display_efficiency_analysis(results, advanced_metrics):
         else:  # Área - escalar según un valor de referencia
             normalized_values.append(min(100, (value / 10) * 100))  # Asumiendo 10 m² como referencia
 
-    # Colores según el rendimiento
+    # Colores según el rendimiento usando esquema profesional del usuario
     colors = []
     for i, norm_val in enumerate(normalized_values):
         if i < 5:  # Para métricas de eficiencia y tiempo
             if norm_val > 80:
-                colors.append('#10b981')  # Verde
+                colors.append('#10b981')  # Verde (energía útil) - excelente
             elif norm_val > 60:
-                colors.append('#f59e0b')  # Amarillo
+                colors.append('#f59e0b')  # Amarillo - bueno
             else:
-                colors.append('#ef4444')  # Rojo
+                colors.append('#ef4444')  # Rojo (pérdidas) - deficiente
         else:
             colors.append('#3b82f6')  # Azul para área
 
